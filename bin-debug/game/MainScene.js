@@ -24,6 +24,8 @@ var MainScene = (function (_super) {
         this.btnStart.addEventListener(egret.TouchEvent.TOUCH_TAP, this.spin, this);
     };
     MainScene.prototype.spin = function (e) {
+        var _this = this;
+        this.btnStart.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.spin, this);
         if (egret.getQualifiedClassName(e.target) === 'eui.Button') {
             this.buttonSound.play(2, 1);
         }
@@ -44,6 +46,7 @@ var MainScene = (function (_super) {
                 var rewardSound = RES.getRes("rewards_mp3");
                 rewardSound.play(0, 1);
             }
+            _this.btnStart.addEventListener(egret.TouchEvent.TOUCH_TAP, _this.spin, _this);
         });
     };
     MainScene.prototype.randomPercentage = function () {

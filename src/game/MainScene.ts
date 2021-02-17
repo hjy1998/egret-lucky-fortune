@@ -5,7 +5,7 @@ class MainScene extends eui.Component implements eui.UIComponent {
 	public wheel: eui.Group
 	public tw: egret.Tween;
 	public isPlaying = false;
-	public buttonSound: egret.Sound = RES.getRes("button_mp3")
+	public buttonSound: egret.Sound = RES.getRes("button_mp3");
 
 	public constructor() {
 		super();
@@ -19,10 +19,11 @@ class MainScene extends eui.Component implements eui.UIComponent {
 	protected childrenCreated(): void {
 		super.childrenCreated();
 
-		this.btnStart.addEventListener(egret.TouchEvent.TOUCH_TAP, this.spin, this)
+		this.btnStart.addEventListener(egret.TouchEvent.TOUCH_TAP, this.spin, this);
 	}
 
 	public spin(e: egret.TouchEvent) {
+		this.btnStart.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.spin, this);
 		if (egret.getQualifiedClassName(e.target) === 'eui.Button') {
 			this.buttonSound.play(2, 1);
 		}
@@ -42,6 +43,7 @@ class MainScene extends eui.Component implements eui.UIComponent {
 				let rewardSound: egret.Sound = RES.getRes("rewards_mp3");
 				rewardSound.play(0, 1);
 			}
+			this.btnStart.addEventListener(egret.TouchEvent.TOUCH_TAP, this.spin, this);
 		})
 
 	}
